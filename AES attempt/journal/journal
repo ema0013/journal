@@ -2,3 +2,6 @@
 Today I have started to research modern and historical cryptography. I have decided to attempt the
 AES cipher. Whether or not I will be successful is still unknown. By the weekend I have to fully 
 comprehend the AES cipher.
+5/05/2017:
+Today I am continuing my research on the AES encryption process. Realizing that this encryption does 
+byte manipulation, I have begun to look up Java's byte manipulation capabilities. 
