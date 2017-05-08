@@ -10,7 +10,7 @@ public class Main extends GUIApplication{
 
 	@Override
 	public void initScreen() {
-		// TODO Auto-generated method stub
+			
 		
 	}
 
