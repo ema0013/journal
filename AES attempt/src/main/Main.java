@@ -1,9 +1,9 @@
 package main;
 
-public class Main {
+public class Main extends GUIApplication{
 
-	public Main() {
-		// TODO Auto-generated constructor stub
+	public Main(int width, int height) {
+		super(width,height);
 	}
 
 }
