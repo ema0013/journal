@@ -10,8 +10,8 @@ public class Main extends GUIApplication{
 
 	@Override
 	public void initScreen() {
-			
-		
+		AESScreen mainScreen = new AESScreen(600, 800);
+		setScreen(mainScreen);
 	}
 
 }
