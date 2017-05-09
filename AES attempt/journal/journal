@@ -9,3 +9,5 @@ byte manipulation, I have begun to look up Java's byte manipulation capabilities
 Today I have started to build the "skeleton" of my AES encrypter. I have decided on using 16 bit 
 encryption, which will only require 10 rounds. Also attempted to start to write the block functions
 of AES( the hardest task).
+5/09/2017:
+Today I'm trying to replicate the shiftRow function

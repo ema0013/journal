@@ -32,14 +32,14 @@ public class AES {
 		KeyExpansion();
 		AddRoundKey();
 		for(int i = 0; i < numOfRounds; i ++){
-			SubBytes(key);
-			ShiftRows();
+			SubBytes(null);
+			ShiftRows(null);
 			MixColumns();
 			AddRoundKey();
 		}
 		//final round
-		SubBytes(key);
-		ShiftRows();
+		SubBytes(null);
+		ShiftRows(null);
 		AddRoundKey();
 		return null;
 	}
@@ -51,8 +51,10 @@ public class AES {
 			
 	}
 
-	private void ShiftRows() {
-		// TODO Auto-generated method stub
+	private void ShiftRows(int[] test) {
+		int[] newRow = new int[test.length];
+		
+		
 		
 	}
 
