@@ -30,17 +30,17 @@ public class AES {
 		this.message = input;
 		int numOfRounds = 0;
 		KeyExpansion();
-		AddRoundKey();
+		AddRoundKey(null, null);
 		for(int i = 0; i < numOfRounds; i ++){
-			SubBytes(null);
+			SubBytes(null);//null for now to avoid red lines
 			ShiftRows(null);
 			MixColumns();
-			AddRoundKey();
+			AddRoundKey(null, null);
 		}
 		//final round
 		SubBytes(null);
 		ShiftRows(null);
-		AddRoundKey();
+		AddRoundKey(null, null);
 		return null;
 	}
 
@@ -54,17 +54,40 @@ public class AES {
 	private void ShiftRows(int[] test) {
 		int[] newRow = new int[test.length];
 		
+		 newRow[0] = test[0];
+		 newRow[1] = test[5];
+		 newRow[2] = test[10];
+		 newRow[3] = test[15];
+		 
+		 newRow[4] = test[4];
+		 newRow[5] = test[9];
+		 newRow[6] = test[14];
+		 newRow[7] = test[3];
+		 
+		 newRow[8] = test[8];
+		 newRow[9] = test[13];
+		 newRow[10] = test[2];
+		 newRow[11] = test[7];
+		 
+		 newRow[12] = test[12];
+		 newRow[13] = test[1];
+		 newRow[14] = test[6];
+		 newRow[15] = test[11];
 		
-		
+		 for(int i = 0; i < newRow.length;i++){
+			 test[i] = newRow[i];
+		 }
 	}
 
 	private void MixColumns() {
 		// TODO Auto-generated method stub
 		
 	}
-
-	private void AddRoundKey() {
-		// TODO Auto-generated method stub
+	//performs Modulus addition
+	private void AddRoundKey(int[] test,int[] key ) {
+		for(int i = 0; i < test.length; i++){
+			test[i]^= key[i];//XOR operation
+		}
 		
 	}
 
