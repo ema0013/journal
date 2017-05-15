@@ -15,3 +15,5 @@ Today I'm trying to replicate the shiftRow function
 Still attempting to complete AES encryption method. 
 5/12/2017:
 Today I am learning about Galois fields for AES encryption.
+5/15/2017:
+Today I am continuing to learn about Galois fields and the MixColumns function of the AES algorithm

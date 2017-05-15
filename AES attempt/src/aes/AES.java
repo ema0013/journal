@@ -83,7 +83,7 @@ public class AES {
 		// TODO Auto-generated method stub
 		
 	}
-	//performs Modulus addition
+	//performs Modulus addition, inputs should probably be byte arrays
 	private void AddRoundKey(int[] test,int[] key ) {
 		for(int i = 0; i < test.length; i++){
 			test[i]^= key[i];//XOR operation
