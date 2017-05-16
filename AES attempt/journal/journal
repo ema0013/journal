@@ -17,3 +17,6 @@ Still attempting to complete AES encryption method.
 Today I am learning about Galois fields for AES encryption.
 5/15/2017:
 Today I am continuing to learn about Galois fields and the MixColumns function of the AES algorithm
+5/16/2017:
+Today I have hit a slight roadblock. The implementation of AES was in C++, so I am currently trying to
+wrap my head around what exactly a char is in C++/Java.
