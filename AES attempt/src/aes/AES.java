@@ -1,7 +1,7 @@
 package aes;
 
 public class AES {
-	private int[] key;
+	private char[] key;
 	private static final char[] S_BOX = { 
   0x52, 0x09, 0x6a, 0xd5, 0x30, 0x36, 0xa5, 0x38, 0xbf, 0x40, 0xa3, 0x9e, 0x81, 0xf3, 0xd7, 0xfb
 , 0x7c, 0xe3, 0x39, 0x82, 0x9b, 0x2f, 0xff, 0x87, 0x34, 0x8e, 0x43, 0x44, 0xc4, 0xde, 0xe9, 0xcb
@@ -58,7 +58,7 @@ public class AES {
 	};
 	private String message;
 	
-	public AES(int[] key) {
+	public AES(char[] key) {
 		this.key = key;
 	}
 	
@@ -80,15 +80,15 @@ public class AES {
 		return null;
 	}
 
-	private void SubBytes(int[] test) {
+	private void SubBytes(char[] test) {
 		for(int i = 0; i < test.length;i++){//test.length should be 16
 			test[i] = S_BOX[test[i]];
 		}
 			
 	}
 
-	private void ShiftRows(int[] test) {
-		int[] newRow = new int[test.length];
+	private void ShiftRows(char[] test) {
+		char[] newRow = new char[test.length];
 		
 		 newRow[0] = test[0];
 		 newRow[1] = test[5];
@@ -117,12 +117,12 @@ public class AES {
 
 	private void MixColumns(int[] test) {
 		// performs dot products
-		int[] temp = new int[16];
+		char[] temp = new char[16];
 		
 		
 	}
 	//performs Modulus addition, inputs should probably be byte arrays
-	private void AddRoundKey(int[] test,int[] key ) {
+	private void AddRoundKey(char[] test,char[] key ) {
 		for(int i = 0; i < test.length; i++){
 			test[i]^= key[i];//XOR operation
 		}
