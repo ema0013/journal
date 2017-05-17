@@ -20,3 +20,7 @@ Today I am continuing to learn about Galois fields and the MixColumns function o
 5/16/2017:
 Today I have hit a slight roadblock. The implementation of AES was in C++, so I am currently trying to
 wrap my head around what exactly a char is in C++/Java.
+5/17/2017:
+I have learned that a char is a representation of character. It can also be saved as ASCII code, which
+is represented in a byte. That helps with my understanding of why you implement AES like so. 
+Unfortunately I have yet to complete the algorithm, so I can't test it yet.
