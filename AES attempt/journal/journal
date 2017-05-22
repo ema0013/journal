@@ -24,3 +24,6 @@ wrap my head around what exactly a char is in C++/Java.
 I have learned that a char is a representation of character. It can also be saved as ASCII code, which
 is represented in a byte. That helps with my understanding of why you implement AES like so. 
 Unfortunately I have yet to complete the algorithm, so I can't test it yet.
+5/22/2017:
+Today I am finished the MixColumns step. Now trying to work on the key expansion step of AES. 
+If I completed it properly, the AES should work as intended
