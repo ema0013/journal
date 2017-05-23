@@ -27,3 +27,7 @@ Unfortunately I have yet to complete the algorithm, so I can't test it yet.
 5/22/2017:
 Today I am finished the MixColumns step. Now trying to work on the key expansion step of AES. 
 If I completed it properly, the AES should work as intended
+5/23/2017:
+Today I took a slight detour from my project to watch a TED talk on block chains. The concept of block
+chains seems rather innovative, given the possibilities with secure payments and privatization
+of self creations. 
