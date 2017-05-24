@@ -82,8 +82,8 @@ public class AES {
 	
 	public String aESEncrypt(String input ){
 		this.message = input;
-		int numOfRounds = 0;
-		keyExpansion();
+		int numOfRounds = 9;
+		keyExpansion(null, null);
 		addRoundKey(null, null);
 		for(int i = 0; i < numOfRounds; i ++){
 			subBytes(null);//null for now to avoid red lines
@@ -107,27 +107,27 @@ public class AES {
 
 	private void shiftRows(char[] test) {
 		char[] newRow = new char[test.length];
-		
+		 // each row of the input has it shifted leftward
 		 newRow[0] = test[0];
 		 newRow[1] = test[5];
 		 newRow[2] = test[10];
 		 newRow[3] = test[15];
-		 
+		 //shift one
 		 newRow[4] = test[4];
 		 newRow[5] = test[9];
 		 newRow[6] = test[14];
 		 newRow[7] = test[3];
-		 
+		 //shift 2
 		 newRow[8] = test[8];
 		 newRow[9] = test[13];
 		 newRow[10] = test[2];
 		 newRow[11] = test[7];
-		 
+		 //shift 3
 		 newRow[12] = test[12];
 		 newRow[13] = test[1];
 		 newRow[14] = test[6];
 		 newRow[15] = test[11];
-		
+		 //copy new rows to input
 		 for(int i = 0; i < newRow.length;i++){
 			 test[i] = newRow[i];
 		 }
@@ -167,8 +167,29 @@ public class AES {
 		
 	}
 
-	private void keyExpansion() {
-		// TODO Auto-generated method stub
+	private void keyExpansion(char[] expandedKey,char[] inputKey ) {
+		// copy first 128 bits of input key into the 16 bytes of expanded key
+		if(expandedKey.length!= 176 || inputKey.length != 16)return;
+		for(int i = 0; i < 16; i++){
+			expandedKey[i] = inputKey[i];
+		}
+		
+		int bytesGenerated = 16;
+		int rConIteration = 1;
+		char[] temp = new char[4];
+		
+		while(bytesGenerated < 176){
+			//read the previous 4 bytes of expandedKey
+			for(int i = 0; i < 4; i++){
+				temp[i] = expandedKey[i + bytesGenerated - 4];
+			}
+			
+			//perform the keyExpansion core for each 16 byte key
+			if(bytesGenerated % 16 == 0){
+				keyExpansionCore(temp,rConIteration);
+				rConIteration++;
+			}
+		}
 		
 	}
 	

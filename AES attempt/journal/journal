@@ -31,3 +31,6 @@ If I completed it properly, the AES should work as intended
 Today I took a slight detour from my project to watch a TED talk on block chains. The concept of block
 chains seems rather innovative, given the possibilities with secure payments and privatization
 of self creations. 
+5/24/2017:
+Today I worked on the KeyExpansion sub-step. Once I'm done with that, I will have to create a tester,
+and then work on the actual gui. 
