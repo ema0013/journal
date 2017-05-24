@@ -80,32 +80,32 @@ public class AES {
 		this.key = key;
 	}
 	
-	public String AESEncrpyt(String input ){
+	public String aESEncrypt(String input ){
 		this.message = input;
 		int numOfRounds = 0;
-		KeyExpansion();
-		AddRoundKey(null, null);
+		keyExpansion();
+		addRoundKey(null, null);
 		for(int i = 0; i < numOfRounds; i ++){
-			SubBytes(null);//null for now to avoid red lines
-			ShiftRows(null);
-			MixColumns(null);
-			AddRoundKey(null, null);
+			subBytes(null);//null for now to avoid red lines
+			shiftRows(null);
+			mixColumns(null);
+			addRoundKey(null, null);
 		}
 		//final round
-		SubBytes(null);
-		ShiftRows(null);
-		AddRoundKey(null, null);
+		subBytes(null);
+		shiftRows(null);
+		addRoundKey(null, null);
 		return null;
 	}
 
-	private void SubBytes(char[] test) {
+	private void subBytes(char[] test) {
 		for(int i = 0; i < test.length;i++){//test.length should be 16
 			test[i] = S_BOX[test[i]];
 		}
 			
 	}
 
-	private void ShiftRows(char[] test) {
+	private void shiftRows(char[] test) {
 		char[] newRow = new char[test.length];
 		
 		 newRow[0] = test[0];
@@ -133,7 +133,7 @@ public class AES {
 		 }
 	}
 
-	private void MixColumns(int[] test) {
+	private void mixColumns(int[] test) {
 		// performs dot products
 		char[] tmp = new char[16];
 		tmp[0] = (char)(TWO_BOX[test[0]] ^ THREE_BOX[test[1]] ^ test[2] ^ test[3]);
@@ -160,19 +160,19 @@ public class AES {
 		}
 	}
 	//performs Modulus addition, inputs should probably be byte arrays
-	private void AddRoundKey(char[] test,char[] key ) {
+	private void addRoundKey(char[] test,char[] key ) {
 		for(int i = 0; i < test.length; i++){
 			test[i]^= key[i];//XOR operation
 		}
 		
 	}
 
-	private void KeyExpansion() {
+	private void keyExpansion() {
 		// TODO Auto-generated method stub
 		
 	}
 	
-	private void KeyExpansionCore(char[] test, int i){
+	private void keyExpansionCore(char[] test, int i){
 		//rotation to the left
 		char k = test[0];
 		test[0] = test[1];
@@ -185,6 +185,8 @@ public class AES {
 		test[1] = S_BOX[test[1]];
 		test[2] = S_BOX[test[2]];
 		test[3] = S_BOX[test[3]];
+		
+		test[0]^= RCON[i];
 		
 	}
 	
