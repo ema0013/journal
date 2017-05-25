@@ -34,3 +34,6 @@ of self creations.
 5/24/2017:
 Today I worked on the KeyExpansion sub-step. Once I'm done with that, I will have to create a tester,
 and then work on the actual gui. 
+5/25/2017:
+Today I have begun working on how the encryption will recieve the user input ie. the key and the input
+to be used.
