@@ -40,3 +40,7 @@ to be used.
 5/16/2017: 
 I may have made some mistakes in my implementation of the code. Will have to go home and verify if that's
 the case. At the worst, I may have to redo the substeps.
+5/30/2017: 
+Today I am trying to work on the AES cipher again. I am well aware that Java has a built in Cipher
+object which already has the AES cipher implemented, but I would rather try and build my own cipher
+first.

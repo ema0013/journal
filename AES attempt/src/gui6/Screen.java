@@ -76,66 +76,6 @@ public abstract class Screen implements Runnable{
 	}
 	
 	public void remove(Visible v){
-		/**
-		 * Note: In this implementation we have a very simple command
-		 * remove(v). However, remove is a BIG DEAL on the AP Exam.
-		 * 
-		 * Here's Why: When an object is removed from a List, every other 
-		 * object AFTER that object is moved up in order. Therefore, all
-		 * of their respective indicies change. 
-		 * You MUST, MUST, MUST be aware of this.
-		 * 
-		 * Here is a classic example:
-		 * 
-		 * The following is WRONG:
-		 * Suppose you have a List<Integer> with
-		 * {4,8,7,1}
-		 * and you want to remove all integers > 5
-		 * you do this: 
-		 * for(int i = 0; i < list.size();i++){
-		 * 		if(list.get(i)>5){
-		 * 			list.remove(i);
-		 * 		}
-		 * }
-		 * 
-		 * 		YOU FAILLLLLLLLLLLLLLLLLLLLLLL
-		 * 
-		 * But why do you fail?
-		 * i = 0; nothing changes
-		 * i = 1; the 8 is removed. List is now {4,7,1}
-		 * i = 2; nothing changes
-		 * i = 3; for loop exited
-		 * we have {4,7,1} 7 is not removed therefore you failed
-		 * 
-		 * THESE TWO WAYS ARE CORRECT:
-		 * 
-		 * for(int i = 0; i < list.size();i++){
-		 * 		while(list.get(i)>5){
-		 * 			list.remove(i);
-		 * 		}
-		 * }
-		 * 
-		 * for(int i = 0; i < list.size();i++){
-		 * 		if(list.get(i)>5){
-		 * 			list.remove(i);
-		 * 			i--;//compensate for i++
-		 * 		}
-		 * }
-		 * 
-		 * 
-		 * for the same reason, this doesn't even work
-		 * (because size can be changed)
-		 * for(Integer i : list){
-		 * 		if(i>5)list.remove(i);
-		 * }
-		 * 		
-		 * ONE MORE NOTE:
-		 * if you call list.remove(int) it will return 
-		 * the object being removed at that index
-		 * so you can do something like this : System.out.println(list.remove(0).toString() +"was removed");
-		 *  
-		 **/
-		
 		viewObjects.remove(v);
 	}
 	
