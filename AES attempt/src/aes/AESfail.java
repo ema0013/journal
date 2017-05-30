@@ -2,8 +2,8 @@ package aes;
 
 public class AESfail {
 
-	private byte[] key;
-	private static final int[] S_BOX = { 
+	private char[] key;
+	private static final char[] S_BOX = { 
   0x52, 0x09, 0x6a, 0xd5, 0x30, 0x36, 0xa5, 0x38, 0xbf, 0x40, 0xa3, 0x9e, 0x81, 0xf3, 0xd7, 0xfb
 , 0x7c, 0xe3, 0x39, 0x82, 0x9b, 0x2f, 0xff, 0x87, 0x34, 0x8e, 0x43, 0x44, 0xc4, 0xde, 0xe9, 0xcb
 , 0x54, 0x7b, 0x94, 0x32, 0xa6, 0xc2, 0x23, 0x3d, 0xee, 0x4c, 0x95, 0x0b, 0x42, 0xfa, 0xc3, 0x4e
@@ -21,7 +21,7 @@ public class AESfail {
 , 0xa0, 0xe0, 0x3b, 0x4d, 0xae, 0x2a, 0xf5, 0xb0, 0xc8, 0xeb, 0xbb, 0x3c, 0x83, 0x53, 0x99, 0x61
 , 0x17, 0x2b, 0x04, 0x7e, 0xba, 0x77, 0xd6, 0x26, 0xe1, 0x69, 0x14, 0x63, 0x55, 0x21, 0x0c, 0x7d 
 };
-	private static final int[] TWO_BOX = {
+	private static final char[] TWO_BOX = {
 0x00,0x02,0x04,0x06,0x08,0x0a,0x0c,0x0e,0x10,0x12,0x14,0x16,0x18,0x1a,0x1c,0x1e,
 0x20,0x22,0x24,0x26,0x28,0x2a,0x2c,0x2e,0x30,0x32,0x34,0x36,0x38,0x3a,0x3c,0x3e,
 0x40,0x42,0x44,0x46,0x48,0x4a,0x4c,0x4e,0x50,0x52,0x54,0x56,0x58,0x5a,0x5c,0x5e,
@@ -39,7 +39,7 @@ public class AESfail {
 0xdb,0xd9,0xdf,0xdd,0xd3,0xd1,0xd7,0xd5,0xcb,0xc9,0xcf,0xcd,0xc3,0xc1,0xc7,0xc5,
 0xfb,0xf9,0xff,0xfd,0xf3,0xf1,0xf7,0xf5,0xeb,0xe9,0xef,0xed,0xe3,0xe1,0xe7,0xe5	
 };
-	private static final int[] THREE_BOX = {
+	private static final char[] THREE_BOX = {
 0x00,0x03,0x06,0x05,0x0c,0x0f,0x0a,0x09,0x18,0x1b,0x1e,0x1d,0x14,0x17,0x12,0x11,
 0x30,0x33,0x36,0x35,0x3c,0x3f,0x3a,0x39,0x28,0x2b,0x2e,0x2d,0x24,0x27,0x22,0x21,
 0x60,0x63,0x66,0x65,0x6c,0x6f,0x6a,0x69,0x78,0x7b,0x7e,0x7d,0x74,0x77,0x72,0x71,
@@ -57,7 +57,7 @@ public class AESfail {
 0x3b,0x38,0x3d,0x3e,0x37,0x34,0x31,0x32,0x23,0x20,0x25,0x26,0x2f,0x2c,0x29,0x2a,
 0x0b,0x08,0x0d,0x0e,0x07,0x04,0x01,0x02,0x13,0x10,0x15,0x16,0x1f,0x1c,0x19,0x1a			
 	};
-	private final int[] RCON = {
+	private final char[] RCON = {
 0x8d, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36, 0x6c, 0xd8, 0xab, 0x4d, 0x9a, 
 0x2f, 0x5e, 0xbc, 0x63, 0xc6, 0x97, 0x35, 0x6a, 0xd4, 0xb3, 0x7d, 0xfa, 0xef, 0xc5, 0x91, 0x39, 
 0x72, 0xe4, 0xd3, 0xbd, 0x61, 0xc2, 0x9f, 0x25, 0x4a, 0x94, 0x33, 0x66, 0xcc, 0x83, 0x1d, 0x3a, 
@@ -75,23 +75,23 @@ public class AESfail {
 0xc6, 0x97, 0x35, 0x6a, 0xd4, 0xb3, 0x7d, 0xfa, 0xef, 0xc5, 0x91, 0x39, 0x72, 0xe4, 0xd3, 0xbd, 
 0x61, 0xc2, 0x9f, 0x25, 0x4a, 0x94, 0x33, 0x66, 0xcc, 0x83, 0x1d, 0x3a, 0x74, 0xe8, 0xcb, 0x8d
 		};
-	private byte[] message;
+	private char[] message;
 	
-	public AESfail(byte[] key) {
+	public AESfail(char[] key) {
 		this.key = key;
 	}
 	
-	public String aESEncrypt(byte[] input ){
+	public String aESEncrypt(char[] input ){
 		this.message = input;
 		
-		byte[] testing = new byte[16];
+		char[] testing = new char[16];
 		for(int i = 0; i < 16; i++){
 			testing[i] = input[i];
 		}
 		int numOfRounds = 9;
 		
 		//key expansion
-		byte[] expandedKey = new byte[176];
+		char[] expandedKey = new char[176];
 		keyExpansion(expandedKey, key);
 		addRoundKey(testing, key);
 		for(int i = 0; i < numOfRounds; i ++){
@@ -107,15 +107,15 @@ public class AESfail {
 		return null;
 	}
 
-	private void subBytes(byte[] test) {
+	private void subBytes(char[] test) {
 		for(int i = 0; i < test.length;i++){//test.length should be 16
-			test[i] = (byte) S_BOX[test[i]];
+			test[i] = S_BOX[test[i]];
 		}
 			
 	}
 
-	private void shiftRows(byte[] test) {
-		byte[] newRow = new byte[test.length];
+	private void shiftRows(char[] test) {
+		char[] newRow = new char[test.length];
 		 // each row of the input has it shifted leftward
 		 newRow[0] = test[0];
 		 newRow[1] = test[5];
@@ -142,41 +142,41 @@ public class AESfail {
 		 }
 	}
 
-	private void mixColumns(byte[] test) {
+	private void mixColumns(char[] test) {
 		// performs dot products
-		byte[] tmp = new byte[16];
-		tmp[0] = (byte)(TWO_BOX[test[0]] ^ THREE_BOX[test[1]] ^ test[2] ^ test[3]);
-		tmp[1] = (byte) (test[0] ^ TWO_BOX[test[1]] ^ THREE_BOX[test[2]] ^ test[3]);
-		tmp[2] = (byte) (test[0] ^ test[1] ^ TWO_BOX[test[2]] ^ THREE_BOX[test[3]]);
-		tmp[3] = (byte) (THREE_BOX[test[0]] ^ test[1] ^ test[2] ^ TWO_BOX[test[3]]);
+		char[] tmp = new char[16];
+		tmp[0] = (char) (TWO_BOX[test[0]] ^ THREE_BOX[test[1]] ^ test[2] ^ test[3]);
+		tmp[1] = (char) (test[0] ^ TWO_BOX[test[1]] ^ THREE_BOX[test[2]] ^ test[3]);
+		tmp[2] = (char) (test[0] ^ test[1] ^ TWO_BOX[test[2]] ^ THREE_BOX[test[3]]);
+		tmp[3] = (char) (THREE_BOX[test[0]] ^ test[1] ^ test[2] ^ TWO_BOX[test[3]]);
 
-		tmp[4] = (byte) (TWO_BOX[test[4]] ^ THREE_BOX[test[5]] ^ test[6] ^ test[7]);
-		tmp[5] = (byte) (test[4] ^ TWO_BOX[test[5]] ^ THREE_BOX[test[6]] ^ test[7]);
-		tmp[6] = (byte) (test[4] ^ test[5] ^ TWO_BOX[test[6]] ^ THREE_BOX[test[7]]);
-		tmp[7] = (byte) (THREE_BOX[test[4]] ^ test[5] ^ test[6] ^ TWO_BOX[test[7]]);
+		tmp[4] = (char) (TWO_BOX[test[4]] ^ THREE_BOX[test[5]] ^ test[6] ^ test[7]);
+		tmp[5] = (char) (test[4] ^ TWO_BOX[test[5]] ^ THREE_BOX[test[6]] ^ test[7]);
+		tmp[6] = (char) (test[4] ^ test[5] ^ TWO_BOX[test[6]] ^ THREE_BOX[test[7]]);
+		tmp[7] = (char) (THREE_BOX[test[4]] ^ test[5] ^ test[6] ^ TWO_BOX[test[7]]);
 
-		tmp[8] = (byte) (TWO_BOX[test[8]] ^ THREE_BOX[test[9]] ^ test[10] ^ test[11]);
-		tmp[9] = (byte) (test[8] ^ TWO_BOX[test[9]] ^ THREE_BOX[test[10]] ^ test[11]);
-		tmp[10] = (byte) (test[8] ^ test[9] ^ TWO_BOX[test[10]] ^ THREE_BOX[test[11]]);
-		tmp[11] = (byte) (THREE_BOX[test[8]] ^ test[9] ^ test[10] ^ TWO_BOX[test[11]]);
+		tmp[8] = (char) (TWO_BOX[test[8]] ^ THREE_BOX[test[9]] ^ test[10] ^ test[11]);
+		tmp[9] = (char) (test[8] ^ TWO_BOX[test[9]] ^ THREE_BOX[test[10]] ^ test[11]);
+		tmp[10] = (char) (test[8] ^ test[9] ^ TWO_BOX[test[10]] ^ THREE_BOX[test[11]]);
+		tmp[11] = (char) (THREE_BOX[test[8]] ^ test[9] ^ test[10] ^ TWO_BOX[test[11]]);
 
-		tmp[12] = (byte) (TWO_BOX[test[12]] ^ THREE_BOX[test[13]] ^ test[14] ^ test[15]);
-		tmp[13] = (byte) (test[12] ^ TWO_BOX[test[13]] ^ THREE_BOX[test[14]] ^ test[15]);
-		tmp[14] = (byte) (test[12] ^ test[13] ^ TWO_BOX[test[14]] ^ THREE_BOX[test[15]]);
-		tmp[15] = (byte) (THREE_BOX[test[12]] ^ test[13] ^ test[14] ^ TWO_BOX[test[15]]);
+		tmp[12] = (char) (TWO_BOX[test[12]] ^ THREE_BOX[test[13]] ^ test[14] ^ test[15]);
+		tmp[13] = (char) (test[12] ^ TWO_BOX[test[13]] ^ THREE_BOX[test[14]] ^ test[15]);
+		tmp[14] = (char) (test[12] ^ test[13] ^ TWO_BOX[test[14]] ^ THREE_BOX[test[15]]);
+		tmp[15] = (char) (THREE_BOX[test[12]] ^ test[13] ^ test[14] ^ TWO_BOX[test[15]]);
 		for(int i = 0; i < 16; i++){
 			test[i] = tmp[i];
 		}
 	}
 	//performs Modulus addition, inputs should probably be byte arrays
-	private void addRoundKey(byte[] test,byte[] key ) {
+	private void addRoundKey(char[] test,char[] key ) {
 		for(int i = 0; i < test.length; i++){
 			test[i]^= key[i];//XOR operation
 		}
 		
 	}
 
-	private void keyExpansion(byte[] expandedKey,byte[] inputKey ) {
+	private void keyExpansion(char[] expandedKey,char[] inputKey ) {
 		// copy first 128 bits of input key into the 16 bytes of expanded key
 		if(expandedKey.length!= 176 || inputKey.length != 16)return;
 		for(int i = 0; i < 16; i++){
@@ -185,7 +185,7 @@ public class AESfail {
 		
 		int bytesGenerated = 16;
 		int rConIteration = 1;
-		byte[] temp = new byte[4];
+		char[] temp = new char[4];
 		
 		while(bytesGenerated < 176){
 			//read the previous 4 bytes of expandedKey
@@ -202,19 +202,19 @@ public class AESfail {
 		
 	}
 	
-	private void keyExpansionCore(byte[] test, int i){
+	private void keyExpansionCore(char[] test, int i){
 		//rotation to the left
-		byte k = test[0];
+		char k = test[0];
 		test[0] = test[1];
 		test[1] = test[2];
 		test[2] = test[3];
 		test[3] = k;
 		
 		//substitution with s-box values
-		test[0] = (byte) S_BOX[test[0]];
-		test[1] = (byte) S_BOX[test[1]];
-		test[2] = (byte) S_BOX[test[2]];
-		test[3] = (byte) S_BOX[test[3]];
+		test[0] = S_BOX[test[0]];
+		test[1] = S_BOX[test[1]];
+		test[2] = S_BOX[test[2]];
+		test[3] = S_BOX[test[3]];
 		
 		test[0]^= RCON[i];
 		
