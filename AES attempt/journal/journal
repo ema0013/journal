@@ -44,3 +44,6 @@ the case. At the worst, I may have to redo the substeps.
 Today I am trying to work on the AES cipher again. I am well aware that Java has a built in Cipher
 object which already has the AES cipher implemented, but I would rather try and build my own cipher
 first.
+5/31/2017:
+Today I have continued working on the cipher. By tomorrow I should finish the encoding part and should
+begin testing it.

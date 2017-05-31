@@ -134,7 +134,7 @@ public class AES {
 
 		return tmp;
 	}
-	
+
 	private static byte[][]subBytes(byte[][] state){
 		byte[][] temp = new byte[state.length][state[0].length];
 		for(int i = 0; i < 4; i++){
@@ -142,7 +142,7 @@ public class AES {
 				temp[i][j] = (byte) S_BOX[state[i][j]& 0x000000ff];//substitutes values for S_BOX equivalent
 			}
 		}
-		
+
 		return temp;
 	}
 
@@ -156,24 +156,38 @@ public class AES {
 		}
 		return state;
 	}
-	
+
 	private static byte[][]mixColumns(byte[][] state){
 		int[] test = new int[4];
 		byte x02 = (byte)0x02;
 		byte x03 = (byte)0x03;
 		for(int i = 0; i < 4; i++){
 			test[0] = FFMul(x02, state[i][0]) ^ FFMul(x03, state[i][1]) ^ state[i][2] ^ state[i][3];
-			 test[1] = state[i][0] ^ FFMul(x02, state[i][1]) ^ FFMul(x03, state[i][2]) ^ state[i][3];
-			 test[2] = state[i][0] ^ state[i][1] ^ FFMul(x02, state[i][2]) ^ FFMul(x03, state[i][3]);
-			 test[3] = FFMul(x03, state[i][0]) ^ state[i][1] ^ state[i][2] ^ FFMul(x02, state[i][3]);
-			 for (int k = 0; k < 4; k++) state[i][k] = (byte)(test[k]);
+			test[1] = state[i][0] ^ FFMul(x02, state[i][1]) ^ FFMul(x03, state[i][2]) ^ state[i][3];
+			test[2] = state[i][0] ^ state[i][1] ^ FFMul(x02, state[i][2]) ^ FFMul(x03, state[i][3]);
+			test[3] = FFMul(x03, state[i][0]) ^ state[i][1] ^ state[i][2] ^ FFMul(x02, state[i][3]);
+			for (int k = 0; k < 4; k++) state[i][k] = (byte)(test[k]);
 		}
 		return state;
 	}
 
 	private static int FFMul(byte a, byte b) {
-
-		return 0;
+		byte aa = a, bb = b, r = 0, t;
+		while (aa != 0) {
+			if ((aa & 1) != 0)
+				r = (byte) (r ^ bb);
+			t = (byte) (bb & 0x80);
+			bb = (byte) (bb << 1);
+			if (t != 0)
+				bb = (byte) (bb ^ 0x1b);
+			aa = (byte) ((aa & 0xff) >> 1);
+		}
+		return r;
+	}
+	
+	private static byte[] encryptionKek(byte[] input){ 
+		
+		return null;
 	}
 
 
