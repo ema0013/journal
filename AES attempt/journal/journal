@@ -47,3 +47,6 @@ first.
 5/31/2017:
 Today I have continued working on the cipher. By tomorrow I should finish the encoding part and should
 begin testing it.
+6/01/2017:
+Today I finished my attempt of the AES encryption. However it doesn't work as intended. Given the current
+time restraints I will have to use Java's built in cipher to complete the project in time. 

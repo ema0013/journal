@@ -56,13 +56,72 @@ public class AES {
 		// this will be the 128 bit version of the AES, so 16 bytes and 10 rounds
 	}
 
-	public static byte[] AESEncrypt(byte[] input,byte[] key){
+	public static byte[] aesEncrypt(byte[] input,byte[] key){
 		numOfCols = 4;
 		numKeyLength = key.length/4;
 		numberOfRounds = numKeyLength+6;
+		
+		int length = 0;
+		int i;
+		length = 16 - input.length%16;
+		byte[] padding = new byte[length];
+		padding[0] = (byte) 0x80;
+		
+		for(i = 1; i < length; i++){
+			padding[i] = 0;
+		}
+		
+		byte[]temp = new byte[input.length + length];
+		byte[]bloc = new byte[16];
+		
+		subKey = generateSubKeys(key);
+		
+		int count = 0;
+		
+		for(i = 0; i < input.length + length; i++){
+			if(i > 0 && i % 16 == 0){
+				bloc = encryptionKek(bloc);
+				System.arraycopy(bloc, 0, temp, i - 16, bloc.length);
+			}
+			if(i < input.length){
+				bloc[i%16] = input[i];
+			}
+			else{
+				bloc[i%16] = padding[count%16];
+				count++;
+			}
+			if(bloc.length == 16){
+				bloc = encryptionKek(bloc);
+				System.arraycopy(bloc, 0, temp, i - 16, bloc.length);
+			}
+		}
+		
+		return temp;
 
-		return null;
-
+	}
+	private static byte[] encryptionKek(byte[] input){ 
+		byte[] temp = new byte[input.length];
+		byte[][] state = new byte[4][numOfCols];
+		for (int i = 0; i < input.length; i++){
+			state[i / 4][i % 4] = input[i%4*4+i/4];
+		}
+		//first 9 rounds
+		state = addRoundKey(state,subKey,0);
+		for(int i = 1; i < numberOfRounds; i++){
+			state = subBytes(state);
+			state = shiftRows(state);
+			state = mixColumns(state);
+			state = addRoundKey(state,subKey,i);
+		}
+		//final round
+		state = subBytes(state);
+		state = shiftRows(state);
+		state = addRoundKey(state,subKey,numberOfRounds);
+		//copy to temp
+		for (int i = 0; i < temp.length; i++){
+			temp[i%4*4+i/4] = state[i / 4][i%4];
+		}
+		return temp;
 	}
 	private static byte[] xorAdd(byte[] a, byte[] b){
 		byte[] output = new byte[a.length];
@@ -123,13 +182,13 @@ public class AES {
 		return tmp;
 	}
 
-	private static byte[][] AddRoundKey(byte[][] state, byte[][] w, int round) {
+	private static byte[][] addRoundKey(byte[][] state, byte[][] subKey, int round) {
 
 		byte[][] tmp = new byte[state.length][state[0].length];
 
 		for (int c = 0; c < numOfCols; c++) {
 			for (int l = 0; l < 4; l++)
-				tmp[c][l] = (byte) (state[round * numOfCols + c][l] ^ w[round * numOfCols + c][l]);
+				tmp[c][l] = (byte) (state[c][l] ^ subKey[(round * numOfCols) + c][l]);
 		}
 
 		return tmp;
@@ -139,7 +198,7 @@ public class AES {
 		byte[][] temp = new byte[state.length][state[0].length];
 		for(int i = 0; i < 4; i++){
 			for(int j = 0; j < numOfCols;j++){
-				temp[i][j] = (byte) S_BOX[state[i][j]& 0x000000ff];//substitutes values for S_BOX equivalent
+				temp[i][j] = (byte) (S_BOX[state[i][j]& 0x000000ff]&0xff);//substitutes values for S_BOX equivalent
 			}
 		}
 
@@ -184,11 +243,9 @@ public class AES {
 		}
 		return r;
 	}
-	
-	private static byte[] encryptionKek(byte[] input){ 
-		
-		return null;
-	}
+
+
+
 
 
 
