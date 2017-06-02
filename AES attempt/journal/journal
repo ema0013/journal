@@ -50,3 +50,6 @@ begin testing it.
 6/01/2017:
 Today I finished my attempt of the AES encryption. However it doesn't work as intended. Given the current
 time restraints I will have to use Java's built in cipher to complete the project in time. 
+6/02/2017:
+Today I am trying to learn javax's Cipher and keys. Currently trying to convert user input(string)
+to Key

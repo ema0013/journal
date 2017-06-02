@@ -1,7 +1,11 @@
 package main;
 
-import aes.AES;
+//import aes.AES;
 import gui6.GUIApplication;
+
+import java.security.Key;
+
+import javax.crypto.Cipher;
 
 public class Main extends GUIApplication{
 
@@ -19,10 +23,11 @@ public class Main extends GUIApplication{
 //		Thread game = new Thread(g);
 //		game.start();
 		String textClar = "AES attempt to encrypt";
-		 //AES
 		 String j = "1a25s8fe5dsg65ad";
+		 Cipher test = Cipher.getInstance("AES");
+		 Key keyTest = j.getBytes().getEncoded();
 		 System.out.println("Original Text: "+textClar);
-		 byte[] encr = AES.aesEncrypt(textClar.getBytes(), j.getBytes());
+//		 byte[] encr = AES.aesEncrypt(textClar.getBytes(), j.getBytes());
 		 System.out.println("Encrypted text "+new String(encr));
 	}
 
