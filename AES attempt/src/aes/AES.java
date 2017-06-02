@@ -60,24 +60,24 @@ public class AES {
 		numOfCols = 4;
 		numKeyLength = key.length/4;
 		numberOfRounds = numKeyLength+6;
-		
+
 		int length = 0;
 		int i;
 		length = 16 - input.length%16;
 		byte[] padding = new byte[length];
 		padding[0] = (byte) 0x80;
-		
+
 		for(i = 1; i < length; i++){
 			padding[i] = 0;
 		}
-		
+
 		byte[]temp = new byte[input.length + length];
 		byte[]bloc = new byte[16];
-		
+
 		subKey = generateSubKeys(key);
-		
+
 		int count = 0;
-		
+
 		for(i = 0; i < input.length + length; i++){
 			if(i > 0 && i % 16 == 0){
 				bloc = encryptionKek(bloc);
@@ -95,7 +95,7 @@ public class AES {
 				System.arraycopy(bloc, 0, temp, i - 16, bloc.length);
 			}
 		}
-		
+
 		return temp;
 
 	}
