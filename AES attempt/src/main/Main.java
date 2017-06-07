@@ -1,7 +1,7 @@
 package main;
 
 //import aes.AES;
-import gui6.GUIApplication;
+import guiTeacher.GUIApplication;
 
 import java.security.InvalidKeyException;
 import java.security.Key;
@@ -30,10 +30,10 @@ public class Main extends GUIApplication{
 		setScreen(mainScreen);
 	}
 	public static void main(String[] args){
-		//		Main g = new Main(800,600);
-		//		Thread game = new Thread(g);
-		//		game.start();
-		
+				Main g = new Main(800,600);
+				Thread game = new Thread(g);
+				game.start();
+				g.setVisible(true);
 		
 
 	}

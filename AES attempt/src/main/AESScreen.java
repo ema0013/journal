@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.security.InvalidKeyException;
@@ -15,13 +16,18 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 
+import aes.OptionAccordion;
+import gui6.components.Action;
 import guiTeacher.components.Accordion;
 import guiTeacher.userInterfaces.Screen;
 import guiTeacher.components.Button;
+import guiTeacher.components.ScrollablePane;
 import guiTeacher.components.TextArea;
 import guiTeacher.components.TextField;
 import guiTeacher.userInterfaces.FullFunctionScreen;
 import interfaces.Visible;
+
+import main.Main;
 
 public class AESScreen extends FullFunctionScreen implements MouseListener{
 	private TextArea title;
@@ -30,6 +36,7 @@ public class AESScreen extends FullFunctionScreen implements MouseListener{
 	private Cipher cipher;
 	private TextField keyInput;
 	private TextField stateInput;
+	private ScrollablePane cipherType;
 	
 
 	public AESScreen(int width, int height) {
@@ -107,47 +114,20 @@ public class AESScreen extends FullFunctionScreen implements MouseListener{
 
 		return decrypted;
 	}
-	public void initObjects(ArrayList<Visible> viewObjects) {
-		cipher = null;
-		questionsByTopic = new TopicAccordion(this, MARGIN,MARGIN+65,_ACCORDION_WIDTH, search);
-		
 
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
 	public void initAllObjects(List<guiTeacher.interfaces.Visible> viewObjects) {
-		// TODO Auto-generated method stub
-		
+		cipher = null;
+//		cipherType = new OptionAccordion(this,40,40,100,100);
+//		viewObjects.add(cipherType);
+		title = new TextArea(300,50,200,100,"AES Cipher in Javax");
+		viewObjects.add(title);
+		toNotes = new Button(25,375,300,100,"Development Notes",Color.blue, new Action(){
+			public void act(){
+				Main.g.setScreen(Main.noteScreen);
+			}
+		});
 	}
 
 }

@@ -38,11 +38,11 @@ public class Button extends TextLabel implements Clickable{
 	protected int curveX;
 	protected int curveY;
 	
-	public Button(int x, int y, int w, int h, String text, Color color, Action action) {
+	public Button(int x, int y, int w, int h, String text, Color color,Action action2) {
 		super(x, y, w, h, text);
 		setBackground(color);
 		enabled = true;
-		this.action = action;
+		this.action = action2;
 		setCurve(35,25);
 		update();
 		
