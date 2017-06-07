@@ -1,9 +1,25 @@
-package gui6.components;
+/*******************************************************************************
+ * Copyright (c) 2016-2017 Benjamin Nockles
+ *
+ * This file is part of OrcMath.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, 
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of 
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License 
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *******************************************************************************/
+package guiTeacher.components;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 public class MovingComponent extends Component implements Runnable{
 	private long moveTime; //time when the image last moved
@@ -60,24 +76,14 @@ public class MovingComponent extends Component implements Runnable{
 			posy += vy*(double)difference/REFRESH_RATE;
 			//note: for very low velocities, position might not move by much. Therefore,
 			//rounding to an int may not change
-			super.setX((int)(posx));
-			//change only X, not posx
-			super.setY((int)(posy));
-			//same for Y
+			setX((int)(posx));
+			setY((int)(posy));
 
 		}
 		drawImage(g);
 	}
 
-	public void setX(int x){
-		super.setX(x);
-		posx = x;
-		//now the actual position is synced with the pixel screen position/
-	}
-	public void setY(int y){
-		super.setY(y);
-		posy = y;
-	}
+
 
 	public double getVx() {
 		return vx;
@@ -135,11 +141,4 @@ public class MovingComponent extends Component implements Runnable{
 		}
 		
 	}
-	public void play(){
-		if(!running){
-			Thread go = new Thread(this);
-			go.start();
-		}
-	}
-
 }

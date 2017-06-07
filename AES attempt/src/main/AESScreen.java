@@ -7,6 +7,7 @@ import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -14,23 +15,28 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 
-import gui6.Screen;
-import gui6.components.Button;
-import gui6.components.TextArea;
+import guiTeacher.components.Accordion;
+import guiTeacher.userInterfaces.Screen;
+import guiTeacher.components.Button;
+import guiTeacher.components.TextArea;
+import guiTeacher.components.TextField;
+import guiTeacher.userInterfaces.FullFunctionScreen;
 import interfaces.Visible;
 
-public class AESScreen extends Screen implements MouseListener{
+public class AESScreen extends FullFunctionScreen implements MouseListener{
 	private TextArea title;
 	private Button toNotes;
 	private Button toHistory;
 	private Cipher cipher;
+	private TextField keyInput;
+	private TextField stateInput;
+	
 
 	public AESScreen(int width, int height) {
 		super(width, height);
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
 	public void run() {
 		// TODO Auto-generated method stub
 
@@ -101,9 +107,9 @@ public class AESScreen extends Screen implements MouseListener{
 
 		return decrypted;
 	}
-	@Override
 	public void initObjects(ArrayList<Visible> viewObjects) {
 		cipher = null;
+		questionsByTopic = new TopicAccordion(this, MARGIN,MARGIN+65,_ACCORDION_WIDTH, search);
 		
 
 	}
@@ -136,6 +142,12 @@ public class AESScreen extends Screen implements MouseListener{
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void initAllObjects(List<guiTeacher.interfaces.Visible> viewObjects) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
