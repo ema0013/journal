@@ -1,4 +1,4 @@
-package gui6.components;
+package interfaces;
 
 public interface Action {
 	public void act();

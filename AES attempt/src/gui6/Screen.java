@@ -9,7 +9,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import gui6.components.Visible;
+import interfaces.Visible;
 
 public abstract class Screen implements Runnable{
 

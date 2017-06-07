@@ -17,12 +17,13 @@ import javax.crypto.spec.SecretKeySpec;
 import gui6.Screen;
 import gui6.components.Button;
 import gui6.components.TextArea;
-import gui6.components.Visible;
+import interfaces.Visible;
 
 public class AESScreen extends Screen implements MouseListener{
 	private TextArea title;
 	private Button toNotes;
 	private Button toHistory;
+	private Cipher cipher;
 
 	public AESScreen(int width, int height) {
 		super(width, height);
@@ -39,7 +40,6 @@ public class AESScreen extends Screen implements MouseListener{
 
 		// Create key and cipher
 		Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
-		Cipher cipher = null;
 		try {
 			cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
 		} catch (NoSuchAlgorithmException e) {
@@ -51,12 +51,6 @@ public class AESScreen extends Screen implements MouseListener{
 		}
 
 		// encrypt the text
-		try {
-			cipher.init(Cipher.ENCRYPT_MODE, aesKey);
-		} catch (InvalidKeyException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		try {
 			cipher.init(Cipher.ENCRYPT_MODE, aesKey);
 		} catch (InvalidKeyException e) {
@@ -79,7 +73,6 @@ public class AESScreen extends Screen implements MouseListener{
 	public String aesDecrypt(String input,String key){// 128 bit key
 		String decrypted = null;
 		Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
-		Cipher cipher = null;
 		
 		try {
 			cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
@@ -110,7 +103,8 @@ public class AESScreen extends Screen implements MouseListener{
 	}
 	@Override
 	public void initObjects(ArrayList<Visible> viewObjects) {
-		// TODO Auto-generated method stub
+		cipher = null;
+		
 
 	}
 

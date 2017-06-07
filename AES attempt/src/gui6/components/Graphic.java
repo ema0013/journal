@@ -5,6 +5,8 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
 
+import interfaces.Visible;
+
 public class Graphic implements Visible {
 
 	//	FIELDS

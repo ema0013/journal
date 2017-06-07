@@ -1,4 +1,4 @@
-package gui6.components;
+package interfaces;
 
 public interface Clickable extends Visible{
 

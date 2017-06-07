@@ -1,5 +1,8 @@
 package gui6.components;
 
+import interfaces.Action;
+import interfaces.Clickable;
+
 public class ClickableGraphic extends Graphic implements Clickable{
 
 	private Action action;

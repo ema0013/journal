@@ -6,6 +6,9 @@ import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
+import interfaces.Action;
+import interfaces.Clickable;
+
 public class Button extends TextLabel implements Clickable{
 
 	private Color color;

@@ -5,8 +5,8 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import gui6.Screen;
-import gui6.components.Clickable;
-import gui6.components.Visible;
+import interfaces.Clickable;
+import interfaces.Visible;
 
 public abstract class ClickableScreen extends Screen implements MouseListener{
 
