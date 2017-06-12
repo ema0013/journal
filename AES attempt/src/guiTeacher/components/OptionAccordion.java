@@ -1,18 +1,10 @@
-package aes;
+package guiTeacher.components;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import guiTeacher.components.Accordion;
-import guiTeacher.components.AccordionTab;
-import guiTeacher.components.Action;
-import guiTeacher.components.ScrollablePane;
-import guiTeacher.components.SearchBox;
-import guiTeacher.components.StyledComponent;
-import guiTeacher.components.TextArea;
-import guiTeacher.components.TextLabel;
 import guiTeacher.interfaces.FocusController;
 import guiTeacher.interfaces.KeyedComponent;
 import guiTeacher.interfaces.Visible;

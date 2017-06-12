@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.Color;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.security.InvalidKeyException;
@@ -16,11 +17,11 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 
-import aes.OptionAccordion;
-import gui6.components.Action;
+import guiTeacher.components.Action;
 import guiTeacher.components.Accordion;
 import guiTeacher.userInterfaces.Screen;
 import guiTeacher.components.Button;
+import guiTeacher.components.OptionAccordion;
 import guiTeacher.components.ScrollablePane;
 import guiTeacher.components.TextArea;
 import guiTeacher.components.TextField;
@@ -29,10 +30,11 @@ import interfaces.Visible;
 
 import main.Main;
 
-public class AESScreen extends FullFunctionScreen implements MouseListener{
+public class AESScreen extends FullFunctionScreen implements MouseListener,KeyListener{
 	private TextArea title;
 	private Button toNotes;
-	private Button toHistory;
+	private Button encrypt;
+	private Button decrypt;
 	private Cipher cipher;
 	private TextField keyInput;
 	private TextField stateInput;
@@ -122,12 +124,26 @@ public class AESScreen extends FullFunctionScreen implements MouseListener{
 //		cipherType = new OptionAccordion(this,40,40,100,100);
 //		viewObjects.add(cipherType);
 		title = new TextArea(300,50,200,100,"AES Cipher in Javax");
-		viewObjects.add(title);
-		toNotes = new Button(25,375,300,100,"Development Notes",Color.blue, new Action(){
+		
+		toNotes = new Button(25,400,200,100,"Development Notes",Color.blue, new Action(){
+			
 			public void act(){
-				Main.g.setScreen(Main.noteScreen);
+				Main.g.setScreen(Main.development);
 			}
 		});
+		encrypt = new Button(200, 50, 50, 50, "Encrypt", Color.red, new Action(){
+			public void act(){
+				
+			}
+		});
+		stateInput = new TextField();
+		viewObjects.add(title);
+		viewObjects.add(toNotes);
 	}
 
+	
+	
+	
+	
+	
 }

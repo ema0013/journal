@@ -40,7 +40,6 @@ import guiTeacher.interfaces.Clickable;
 import guiTeacher.interfaces.Dragable;
 import guiTeacher.interfaces.KeyedComponent;
 import guiTeacher.interfaces.TextComponent;
-import main.OrcMath;
 
 public class TextField extends StyledComponent implements KeyedComponent,Clickable, Runnable, Dragable, TextComponent{
 

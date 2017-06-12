@@ -19,6 +19,12 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
 public class Main extends GUIApplication{
+	public static Main g;
+	public static AESScreen mainScreen;
+	public static NoteScreen development;
+	
+	
+	
 
 	public Main(int width, int height) {
 		super(width,height);
@@ -26,11 +32,12 @@ public class Main extends GUIApplication{
 
 	@Override
 	public void initScreen() {
-		AESScreen mainScreen = new AESScreen(getWidth(), getHeight());
+		mainScreen = new AESScreen(getWidth(), getHeight());
+		development = new NoteScreen(getWidth(),getHeight());
 		setScreen(mainScreen);
 	}
 	public static void main(String[] args){
-				Main g = new Main(800,600);
+				g = new Main(800,600);
 				Thread game = new Thread(g);
 				game.start();
 				g.setVisible(true);
