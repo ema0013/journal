@@ -25,6 +25,7 @@ import guiTeacher.components.OptionAccordion;
 import guiTeacher.components.ScrollablePane;
 import guiTeacher.components.TextArea;
 import guiTeacher.components.TextField;
+import guiTeacher.components.TextInput;
 import guiTeacher.userInterfaces.FullFunctionScreen;
 import interfaces.Visible;
 
@@ -136,9 +137,12 @@ public class AESScreen extends FullFunctionScreen implements MouseListener,KeyLi
 				
 			}
 		});
-		stateInput = new TextField();
+		stateInput = new TextInput(50, 150, 350, 50, "Input in here");
+		keyInput = new TextInput(50,200,350,50,"Key in here");
 		viewObjects.add(title);
 		viewObjects.add(toNotes);
+		viewObjects.add(stateInput);
+		viewObjects.add(keyInput);
 	}
 
 	
