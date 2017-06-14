@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -11,21 +12,19 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.spec.SecretKeySpec;
+import aes.AESJavaX;
 
 import guiTeacher.components.Action;
 import guiTeacher.components.Accordion;
 import guiTeacher.userInterfaces.Screen;
 import guiTeacher.components.Button;
+import guiTeacher.components.Graphic;
 import guiTeacher.components.OptionAccordion;
 import guiTeacher.components.ScrollablePane;
 import guiTeacher.components.TextArea;
+import guiTeacher.components.TextBox;
 import guiTeacher.components.TextField;
-import guiTeacher.components.TextInput;
+import guiTeacher.components.TextLabel;
 import guiTeacher.userInterfaces.FullFunctionScreen;
 import interfaces.Visible;
 
@@ -36,10 +35,12 @@ public class AESScreen extends FullFunctionScreen implements MouseListener,KeyLi
 	private Button toNotes;
 	private Button encrypt;
 	private Button decrypt;
-	private Cipher cipher;
+	private Button copyOutput;
 	private TextField keyInput;
 	private TextField stateInput;
-	private ScrollablePane cipherType;
+	private TextLabel output; 
+	private Graphic bg;
+	//private ScrollablePane cipherType;
 	
 
 	public AESScreen(int width, int height) {
@@ -51,79 +52,11 @@ public class AESScreen extends FullFunctionScreen implements MouseListener,KeyLi
 		// TODO Auto-generated method stub
 
 	}
-	public String AESencrypt(String text,String key){ // 128 bit key
-		byte[] encrypted = null;
-
-		// Create key and cipher
-		Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
-		try {
-			cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchPaddingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		// encrypt the text
-		try {
-			cipher.init(Cipher.ENCRYPT_MODE, aesKey);
-		} catch (InvalidKeyException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		try {
-			encrypted = cipher.doFinal(text.getBytes());
-		} catch (IllegalBlockSizeException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (BadPaddingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return new String(Base64.getEncoder().encodeToString(encrypted));
-
-	}
-	public String aesDecrypt(String input,String key){// 128 bit key
-		String decrypted = null;
-		Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
-		
-		try {
-			cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchPaddingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			cipher.init(Cipher.DECRYPT_MODE, aesKey);
-		} catch (InvalidKeyException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			decrypted = new String(cipher.doFinal(input.getBytes()));
-		} catch (IllegalBlockSizeException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (BadPaddingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return decrypted;
-	}
-
 
 	@Override
 	public void initAllObjects(List<guiTeacher.interfaces.Visible> viewObjects) {
-		cipher = null;
-//		cipherType = new OptionAccordion(this,40,40,100,100);
-//		viewObjects.add(cipherType);
+		bg = new Graphic(0, 0,getWidth(),getHeight(), "resources/test.png");
+		AESJavaX cipher = new AESJavaX();
 		title = new TextArea(300,50,200,100,"AES Cipher in Javax");
 		
 		toNotes = new Button(25,400,200,100,"Development Notes",Color.blue, new Action(){
@@ -132,17 +65,34 @@ public class AESScreen extends FullFunctionScreen implements MouseListener,KeyLi
 				Main.g.setScreen(Main.development);
 			}
 		});
-		encrypt = new Button(200, 50, 50, 50, "Encrypt", Color.red, new Action(){
+		encrypt = new Button(200, 300, 60, 50, "Encrypt", Color.red, new Action(){
 			public void act(){
-				
+				String test = cipher.encrypt(stateInput.getText(),keyInput.getText());
+				output.setText(test);
 			}
 		});
-		stateInput = new TextInput(50, 150, 350, 50, "Input in here");
-		keyInput = new TextInput(50,200,350,50,"Key in here");
+		decrypt = new Button(270,300,60,50,"Decrypt",Color.red,new Action(){
+			public void act(){
+				String test = cipher.decrypt(stateInput.getText(),keyInput.getText());
+				output.setText(test);
+			}
+		});
+		copyOutput = new Button(340,300,100,50,"Copy Output",Color.blue,new Action(){
+			public void act(){
+				stateInput.setText(output.getText());
+			}
+		});
+		stateInput = new TextField(50, 150, 350, 40, "Input in here");
+		keyInput = new TextField(50,200,350,40,"Key in here");
+		output = new TextLabel(100,100,400,100,"Output will be displayed here");
 		viewObjects.add(title);
 		viewObjects.add(toNotes);
 		viewObjects.add(stateInput);
 		viewObjects.add(keyInput);
+		viewObjects.add(output);
+		viewObjects.add(encrypt);
+		viewObjects.add(decrypt);
+		viewObjects.add(copyOutput);
 	}
 
 	

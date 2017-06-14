@@ -1,2 +1,3 @@
 Note:
-None of these implementations have been finished/work as intended
+The AES class and AESfail class have not been finished/work as intended
+AESJavaX uses JavaX's cipher class
