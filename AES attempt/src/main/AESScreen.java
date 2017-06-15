@@ -43,6 +43,7 @@ public class AESScreen extends FullFunctionScreen implements MouseListener,KeyLi
 	private TextColoredLabel output;
 	private TextColoredLabel whatThis;
 	private Graphic bg;
+	private String currOutput;
 	//private ScrollablePane cipherType;
 	
 
@@ -74,7 +75,15 @@ public class AESScreen extends FullFunctionScreen implements MouseListener,KeyLi
 					output.setText("Please refrain from using keys that aren't of length 16.");
 				}
 				else{
-					String test = AESJavaX.encrypt(stateInput.getText(),keyInput.getText());
+					currOutput = AESJavaX.encrypt(stateInput.getText(),keyInput.getText());
+					String test = "";
+					for(int i = 0; i < currOutput.length();i++){
+						if(i!=0 && i%40==0){
+							test+=" ";
+						}
+						test+= currOutput.substring(i, i+1);
+						System.out.println(test);
+					}
 					output.setText(test);
 				}
 			}
@@ -85,15 +94,15 @@ public class AESScreen extends FullFunctionScreen implements MouseListener,KeyLi
 					output.setText("Please refrain from using keys that aren't of length 16.");
 				}
 				else{
-					String test = AESJavaX.decrypt(stateInput.getText(),keyInput.getText());
-					output.setText(test);
+					currOutput = AESJavaX.decrypt(stateInput.getText(),keyInput.getText());
+					output.setText(currOutput);
 				}
 				
 			}
 		});
 		copyOutput = new Button(190,300,100,50,"Copy Output",Color.blue,new Action(){
 			public void act(){
-				stateInput.setText(output.getText());
+				stateInput.setText(currOutput);
 			}
 		});
 		stateInput = new TextField(50, 200, 350, 40, "Input in here");
